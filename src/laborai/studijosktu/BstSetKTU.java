@@ -345,13 +345,18 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
      */
     @Override
     public SetADT<E> headSet(E element) {
-        SetADT<E> sub = new BstSetKTU<>();
-        Iterator<E> it =iterator();
-        E temp;
-        while(element != (temp = it.next())){
-            sub.add(temp);
+         if (element == null) {
+            throw new NullPointerException();
         }
-        throw new UnsupportedOperationException("Studentams reikia realizuoti headSet()");
+        SetADT<E> sub = new BstSetKTU<>();
+        Iterator<E> it = iterator();
+        E temp;
+        while(element != (temp = it.next()) && it.hasNext()){
+            sub.add(temp);
+            
+        }
+        return sub;
+
     }
 
     /**
@@ -363,7 +368,18 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
      */
     @Override
     public SetADT<E> subSet(E element1, E element2) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti subSet()");
+        if (element1 == null || element2 == null) {
+            throw new NullPointerException();
+        }
+         SetADT<E> sub = new BstSetKTU<>();
+        Iterator<E> it = iterator();
+        E temp;
+        while(element1 != (temp = it.next()) && it.hasNext()){
+        }
+        while(element2 != (temp = it.next()) && it.hasNext()){
+            sub.add(temp);
+        }
+        return sub;
     }
 
     /**
