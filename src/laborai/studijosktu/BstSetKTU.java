@@ -1,5 +1,6 @@
 package laborai.studijosktu;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Stack;
@@ -82,7 +83,16 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
 
         return get(element) != null;
     }
-
+    public boolean containsAll(BstSetKTU<?> c){
+        Iterator it = c.iterator();
+        boolean contains = true;
+        while(it.hasNext()){
+            if (!this.contains((E)it.next())) {
+                contains = false;
+            }
+        }
+        return contains;
+    }
     /**
      * Aibė papildoma nauju elementu.
      *
@@ -112,6 +122,18 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         }
 
         return node;
+    }
+    public boolean addAll(Collection<? extends E> c){
+        Iterator it = c.iterator();
+        boolean changed = false;
+        while(it.hasNext()){
+            E temp;
+            if (!this.contains(temp = (E)it.next())) {
+                add(temp);
+                changed = true;
+            }
+        }
+        return changed;
     }
 
     /**
@@ -229,7 +251,20 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         }
         return parent;
     }
-
+    public E floor(E e){
+        
+        if (e == null) {
+            throw new NullPointerException();
+        }
+        SetADT<E> sub = new BstSetKTU<>();
+        Iterator<E> it = iterator();
+        E temp;
+        while(element != (temp = it.next()) && it.hasNext()){
+            sub.add(temp);
+            
+        }
+        return sub;
+    } 
     /**
      * Grąžinamas aibės elementų masyvas.
      *
