@@ -107,6 +107,9 @@ public class kazkas implements KTUable<kazkas> {
 
     @Override
     public int compareTo(kazkas e) {
+        if (e == null) {
+            return 1;
+        }
         if (price > e.price) {
             return 1;
         }

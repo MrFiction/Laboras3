@@ -256,14 +256,17 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         if (e == null) {
             throw new NullPointerException();
         }
-        SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(element != (temp = it.next()) && it.hasNext()){
-            sub.add(temp);
-            
+        E result = null;
+        while(e != ( temp = it.next()) && it.hasNext()){
+            if (e.compareTo(temp)<= 0) {
+                break;
+            }
+            result = temp;
+ 
         }
-        return sub;
+        return result;
     } 
     /**
      * Grąžinamas aibės elementų masyvas.
@@ -386,7 +389,7 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(element != (temp = it.next()) && it.hasNext()){
+        while(element.equals(temp = it.next()) && it.hasNext()){
             sub.add(temp);
             
         }
@@ -409,9 +412,9 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
          SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(element1 != (temp = it.next()) && it.hasNext()){
+        while(!element1.equals(temp = it.next()) && it.hasNext()){
         }
-        while(element2 != (temp = it.next()) && it.hasNext()){
+        while(!element2.equals(temp = it.next()) && it.hasNext()){
             sub.add(temp);
         }
         return sub;
@@ -425,7 +428,18 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
      */
     @Override
     public SetADT<E> tailSet(E element) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti tailSet()");
+        if (element == null) {
+            throw new NullPointerException();
+        }
+        SetADT<E> sub = new BstSetKTU<>();
+        Iterator<E> it = iterator();
+        E temp;
+        while(!element.equals(temp = it.next()) && it.hasNext()){
+        }
+        while(it.hasNext()){
+            sub.add(temp);
+        }
+        return sub;
     }
 
     /**
