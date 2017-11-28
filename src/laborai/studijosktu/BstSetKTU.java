@@ -412,12 +412,19 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
          SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(!element1.equals(temp = it.next()) && it.hasNext()){
+//        while(!element1.equals(temp = it.next()) && it.hasNext()){
+//        }
+//        while(!element2.equals(temp = it.next()) && it.hasNext()){
+//            sub.add(temp);
+//        }
+//------------------------------------------------------------------
+        while(it.hasNext()){
+            temp = it.next();
+            if (element1.compareTo(temp) < 1 || element2.compareTo(temp) < 1 ) {
+                sub.add(temp);
+            }
         }
-        while(!element2.equals(temp = it.next()) && it.hasNext()){
-            sub.add(temp);
-        }
-        return sub;
+        return sub
     }
 
     /**
@@ -434,10 +441,19 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(!element.equals(temp = it.next()) && it.hasNext()){
-        }
+//        
+//        while(!element.equals(temp = it.next()) && it.hasNext()){
+//            
+//        }
+//        while(it.hasNext()){
+//            sub.add(temp);
+//        }
+        //---------------------------------------------------------------
         while(it.hasNext()){
-            sub.add(temp);
+            temp = it.next();
+            if (element.compareTo(temp) < 1) {
+                sub.add(temp);
+            }
         }
         return sub;
     }
