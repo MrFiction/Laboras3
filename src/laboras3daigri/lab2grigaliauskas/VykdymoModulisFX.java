@@ -1,10 +1,10 @@
-package laborai.demo;
+package laboras3daigri.lab2grigaliauskas;
 
+import laborai.demo.*;
 import java.util.Locale;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import laborai.gui.fx.Lab3WindowFX;
-import laboras3daigri.lab2grigaliauskas.Test;
 
 /*
  * Darbo atlikimo tvarka - čia yra JavaFX pradinė klasė.

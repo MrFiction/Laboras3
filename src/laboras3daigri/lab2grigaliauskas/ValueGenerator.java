@@ -8,6 +8,7 @@ package laboras3daigri.lab2grigaliauskas;
 import java.time.LocalDate;
 import java.util.Random;
 
+
 /**
  *
  * @author Dainius
@@ -48,4 +49,24 @@ public class ValueGenerator {
         return randomSNumber;
 
     }
+       public static kazkas[] generate(int sampleSize) {
+          kazkas[] set = new kazkas[sampleSize];
+        for (int i = 0; i < sampleSize; i++) {
+            kazkas obj = randomObject();
+            set[i] =obj;
+        }
+        return set;
+      }
+       static kazkas randomObject() {
+        return new kazkas(ValueGenerator.randomPrice(), ValueGenerator.randomDate(), ValueGenerator.generateString(), ValueGenerator.randomSerialNumber());
+    }
+      public static int[] generateInt(int sampleSize) {
+          Random intGen = new Random();
+          int[] set = new int[sampleSize];
+        for (int i = 0; i < sampleSize; i++) {
+            
+            set[i] = intGen.nextInt(sampleSize);
+        }
+        return set;
+      }
 }

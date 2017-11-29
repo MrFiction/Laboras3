@@ -74,11 +74,44 @@ public class AvlSetKTU<E extends Comparable<E>> extends BstSetKTU<E>
      */
     @Override
     public void remove(E element) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(E element)");
+        if (element == null) {
+            throw new IllegalArgumentException("Element is null in remove(E element)");
+        }
+        root = removeRecursive(element, (AVLNode<E>) root); 
     }
 
     private AVLNode<E> removeRecursive(E element, AVLNode<E> n) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti removeRecursive(E element, AVLNode<E> n)");
+        if (n == null) {
+            return new AVLNode<>(element);
+        }
+        int cmp = c.compare(element, n.element);
+        if (cmp < 0){
+            n.setLeft(removeRecursive(element, n.getLeft()));      
+        }
+        else if (cmp > 0) {
+            n.setRight(removeRecursive(element, n.getRight()));
+        }
+        else if (n.getLeft() != null && n.getRight() != null) {
+            BstNode<E> nodeMax = getMax(n.getLeft());
+            n.element = nodeMax.element;
+            n.left = removeMax(n.getLeft());
+            size--;
+        } else {
+            n = (n.left != null) ? n.getLeft() : n.getRight();
+            size--;
+        }
+         if (n == null) return n;
+        n.height = Math.max(height(n.getLeft()), height(n.getRight())) + 1;
+        int balance = height(n.getLeft()) - height(n.getRight());
+        if (balance > 1 && (height(n.getLeft().getLeft()) - height(n.getLeft().getRight())) >= 0)
+            return rightRotation(n);
+        if (balance > 1 && (height(n.getLeft().getLeft()) - height(n.getLeft().getRight())) < 0)
+            return doubleRightRotation(n);
+        if (balance < -1 && (height(n.getRight().getLeft()) - height(n.getRight().getRight())) <= 0)
+            return leftRotation(n);
+        if (balance < -1 && (height(n.getRight().getLeft()) - height(n.getRight().getRight())) > 0)
+            return doubleLeftRotation(n);
+        return n;
     }
 
 //==============================================================================

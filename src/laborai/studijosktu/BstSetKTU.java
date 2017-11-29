@@ -389,14 +389,65 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
         SetADT<E> sub = new BstSetKTU<>();
         Iterator<E> it = iterator();
         E temp;
-        while(element.equals(temp = it.next()) && it.hasNext()){
+        while(!element.equals(temp = it.next()) && it.hasNext()){
             sub.add(temp);
             
         }
         return sub;
 
     }
+    
+    public SortedSetADT<E> headSet(E element, boolean inclusive) {
+         if (element == null) {
+            throw new NullPointerException();
+        }
+        SortedSetADT<E> sub = new BstSetKTU<>();
+        Iterator<E> it = iterator();
+        E temp;
+        while(!element.equals(temp = it.next()) && it.hasNext()){
+            sub.add(temp);
+            
+        }
+        sub.add(it.next());
+        return sub;
 
+    }
+    
+     public E higher(E e) {
+         if (e == null) {
+            throw new NullPointerException();
+        }
+         if (size == 0) {
+             return null;
+         }
+        Iterator<E> it = iterator();
+        E result = null;
+        while(it.hasNext()){
+            E temp = it.next();
+            if (temp.compareTo(e) == 1 ) {
+                result = temp;
+                break;
+            }
+            
+        }
+
+        return result;
+
+    }
+     public E pollLast() {
+         if (size == 0) {
+             return null;
+         }
+        Iterator<E> it = iterator();
+        E result = null;
+        while(it.hasNext()){
+            result = it.next();
+        }
+
+        return result;
+
+    } 
+     
     /**
      * Grąžinamas aibės poaibis nuo elemento element1 iki element2.
      *
@@ -420,11 +471,15 @@ public class BstSetKTU<E extends Comparable<E>> implements SortedSetADT<E>, Clon
 //------------------------------------------------------------------
         while(it.hasNext()){
             temp = it.next();
-            if (element1.compareTo(temp) < 1 || element2.compareTo(temp) < 1 ) {
+            if (element1.compareTo(temp) > -1 ) {
                 sub.add(temp);
             }
+            if (element2.compareTo(temp) < 1) {
+                break;
+            }
+            
         }
-        return sub
+        return sub;
     }
 
     /**
