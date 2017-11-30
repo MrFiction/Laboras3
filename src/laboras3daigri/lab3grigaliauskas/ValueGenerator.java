@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package laboras3daigri.lab2grigaliauskas;
+package laboras3daigri.lab3grigaliauskas;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -57,7 +57,7 @@ public class ValueGenerator {
         }
         return set;
       }
-       static kazkas randomObject() {
+       public static kazkas randomObject() {
         return new kazkas(ValueGenerator.randomPrice(), ValueGenerator.randomDate(), ValueGenerator.generateString(), ValueGenerator.randomSerialNumber());
     }
       public static int[] generateInt(int sampleSize) {

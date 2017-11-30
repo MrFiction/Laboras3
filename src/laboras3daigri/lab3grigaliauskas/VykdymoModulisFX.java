@@ -1,4 +1,4 @@
-package laboras3daigri.lab2grigaliauskas;
+package laboras3daigri.lab3grigaliauskas;
 
 import laborai.demo.*;
 import java.util.Locale;
