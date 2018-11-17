@@ -93,7 +93,7 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
     private MenuFX menuFX;
     private final Stage stage;
 
-    private static SortedSetADTx<kazkas> Set;
+    private static SortedSetADTx<Kazkas> Set;
     private int sizeOfInitialSubSet, sizeOfGenSet, sizeOfLeftSubSet;
     private double coef;
     private final String[] errors;
@@ -305,17 +305,17 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
         // cmbTreeType objekte
         createTree();
 
-        kazkas[] kArray;
+        Kazkas[] kArray;
         // Jei failas nenurodytas - generuojama
         if (filePath == null) {
             kArray = ValueGenerator.generate(sizeOfGenSet);
             paneParam1.getTfOfTable().get(2).setText(String.valueOf(sizeOfLeftSubSet));
         } else { // Skaitoma is failo
             Set.load(filePath);
-            kArray = new kazkas[Set.size()];
+            kArray = new Kazkas[Set.size()];
             int i = 0;
             for (Object o : Set.toArray()) {
-                kArray[i++] = (kazkas) o;
+                kArray[i++] = (Kazkas) o;
             }
             // Skaitant iš failo išmaišoma standartiniu Collections.shuffle metodu.
             Collections.shuffle(Arrays.asList(kArray), new Random());
@@ -323,7 +323,7 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
 
         // Išmaišyto masyvo elementai surašomi i aibę
         Set.clear();
-        for (kazkas a : kArray) {
+        for (Kazkas a : kArray) {
             Set.add(a);
         }
         // Išvedami rezultatai
@@ -338,7 +338,7 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
 
     private void treeAdd() throws MyException {
         KsFX.setFormatStartOfLine(true);
-        kazkas item = ValueGenerator.randomObject();
+        Kazkas item = ValueGenerator.randomObject();
         Set.add(item);
         paneParam1.getTfOfTable().get(2).setText(String.valueOf(--sizeOfLeftSubSet));   
         KsFX.oun(taOutput, item, MESSAGES.getString("msg7"));
@@ -353,7 +353,7 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
             KsFX.oun(taOutput, Set.toVisualizedString(tfDelimiter.getText()));
         } else {
             int nr = new Random().nextInt(Set.size());
-            kazkas item = (kazkas) Set.toArray()[nr];
+            Kazkas item = (Kazkas) Set.toArray()[nr];
             Set.remove(item);
             KsFX.oun(taOutput, item, MESSAGES.getString("msg6"));
             KsFX.oun(taOutput, Set.toVisualizedString(tfDelimiter.getText()));
@@ -431,10 +431,10 @@ public class Lab3WindowFX extends BorderPane implements EventHandler<ActionEvent
     private void createTree() throws MyException {
         switch (cmbTreeType.getSelectionModel().getSelectedIndex()) {
             case 0:
-                Set = new BstSetKTUx(new kazkas());
+                Set = new BstSetKTUx(new Kazkas());
                 break;
             case 1:
-                Set = new AvlSetKTUx(new kazkas());
+                Set = new AvlSetKTUx(new Kazkas());
                 break;
             default:
                 disableButtons(true);

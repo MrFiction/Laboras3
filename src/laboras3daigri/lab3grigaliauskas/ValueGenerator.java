@@ -49,16 +49,16 @@ public class ValueGenerator {
         return randomSNumber;
 
     }
-       public static kazkas[] generate(int sampleSize) {
-          kazkas[] set = new kazkas[sampleSize];
+       public static Kazkas[] generate(int sampleSize) {
+          Kazkas[] set = new Kazkas[sampleSize];
         for (int i = 0; i < sampleSize; i++) {
-            kazkas obj = randomObject();
+            Kazkas obj = randomObject();
             set[i] =obj;
         }
         return set;
       }
-       public static kazkas randomObject() {
-        return new kazkas(ValueGenerator.randomPrice(), ValueGenerator.randomDate(), ValueGenerator.generateString(), ValueGenerator.randomSerialNumber());
+       public static Kazkas randomObject() {
+        return new Kazkas(ValueGenerator.randomPrice(), ValueGenerator.randomDate(), ValueGenerator.generateString(), ValueGenerator.randomSerialNumber());
     }
       public static int[] generateInt(int sampleSize) {
           Random intGen = new Random();

@@ -19,14 +19,13 @@ public class Test {
     final static int sampleSize = 10;
     private ValueGenerator gen = new ValueGenerator();
     Random rndInt = new Random();
-    //ListKTUx<kazkas> testList = new ListKTUx<>(new kazkas());
-    List<kazkas> halfList = new LinkedList<>();
 
-    static kazkas[] set;
-    static SortedSetADTx<kazkas> aSerija = new BstSetKTUx(new kazkas(), kazkas.byPrice);
 
-     static SortedSetADTx<kazkas> generuotiAibe(int kiekis, int generN) {
-        set = new kazkas[generN];
+    static Kazkas[] set;
+    static SortedSetADTx<Kazkas> aSerija = new BstSetKTUx(new Kazkas(), Kazkas.byPrice);
+
+     static SortedSetADTx<Kazkas> generuotiAibe(int kiekis, int generN) {
+        set = new Kazkas[generN];
         for (int i = 0; i < generN; i++) {
             set[i] = ValueGenerator.randomObject();
         }
@@ -40,36 +39,36 @@ public class Test {
    
     
     public static void Testing() throws CloneNotSupportedException{
-        kazkas item1 = new kazkas(1000.2, ValueGenerator.randomDate(), "1st57275", 20714410);
-        kazkas item2 = ValueGenerator.randomObject();
-        kazkas item3 = ValueGenerator.randomObject();
-        kazkas item4 = ValueGenerator.randomObject();
-        kazkas item5 = ValueGenerator.randomObject();
-        kazkas item6 = ValueGenerator.randomObject();
+        Kazkas item1 = new Kazkas(1000.2, ValueGenerator.randomDate(), "1st57275", 20714410);
+        Kazkas item2 = ValueGenerator.randomObject();
+        Kazkas item3 = ValueGenerator.randomObject();
+        Kazkas item4 = ValueGenerator.randomObject();
+        Kazkas item5 = ValueGenerator.randomObject();
+        Kazkas item6 = ValueGenerator.randomObject();
         
-        kazkas[] itemArray = {item1, item2, item3, item4, item5, item6};
+        Kazkas[] itemArray = {item1, item2, item3, item4, item5, item6};
         
         Ks.oun("Įrašų Aibė:");
-        BstSetKTUx<kazkas> Set = new BstSetKTUx(new kazkas());
+        BstSetKTUx<Kazkas> Set = new BstSetKTUx(new Kazkas());
         
         Collections.shuffle(Arrays.asList(itemArray));
 
-        for (kazkas a : itemArray) {
+        for (Kazkas a : itemArray) {
             Set.add(a);
             Ks.oun("Aibė papildoma: " + a + ". Jos dydis: " + Set.size());
         }
-        kazkas record8 = ValueGenerator.randomObject();
+        Kazkas record8 = ValueGenerator.randomObject();
         Set.add(record8);
         Ks.oun(Set.toVisualizedString(""));
-            SortedSetADTx<kazkas> autoAibeKopija
-                = (SortedSetADTx<kazkas>) Set.clone();
+            SortedSetADTx<Kazkas> autoAibeKopija
+                = (SortedSetADTx<Kazkas>) Set.clone();
         Ks.oun("Kopija: ");
         Ks.oun(autoAibeKopija);
         item5.setPrice(66.66);
         Ks.oun(autoAibeKopija);
         Ks.oun(Set);
      //
-        BstSetKTUx<kazkas> test = new BstSetKTUx(new kazkas());
+        BstSetKTUx<Kazkas> test = new BstSetKTUx(new Kazkas());
         test.add(item1);
         test.add(item5);
         test.add(ValueGenerator.randomObject());
@@ -84,8 +83,12 @@ public class Test {
         Ks.oun(test);
         Ks.oun(Set);
 
-        Ks.oun("containsAll test: ");
+        Ks.oun("containsAll (f) test: ");
         Ks.oun(test.containsAll(Set));
+        Ks.oun("----------------");
+       
+        Ks.oun("containsAll (t)test: ");
+        Ks.oun(Set.containsAll(Set));
         Ks.oun("----------------");
 
         Ks.oun(Set.toVisualizedString(""));

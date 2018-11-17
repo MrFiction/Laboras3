@@ -13,7 +13,7 @@ public class GreitaveikosTyrimas {
     public static final String FINISH_COMMAND = "finish";
     private static final ResourceBundle MESSAGES = ResourceBundle.getBundle("laborai.gui.messages");
 
-    private static final String[] TYRIMU_VARDAI = {"addTreeSet", "addHashSet", "containsTreeSet", "containsTreeSet"};
+    private static final String[] TYRIMU_VARDAI = {"addTreeSet", "addHashSet", "containsTreeSet", "containsHashSet"};
     private static final int[] TIRIAMI_KIEKIAI = {10000, 20000, 40000, 80000};
 
     private final BlockingQueue resultsLogger = new SynchronousQueue();
@@ -23,7 +23,6 @@ public class GreitaveikosTyrimas {
 
     private final TreeSet<Integer> aSeries = new TreeSet<>();
     private final HashSet<Integer> aSeries2 = new HashSet<>();
-
     public GreitaveikosTyrimas() {
         semaphore.release();
         tk = new Timekeeper(TIRIAMI_KIEKIAI, resultsLogger, semaphore);
@@ -47,9 +46,13 @@ public class GreitaveikosTyrimas {
 
     public void SisteminisTyrimas() throws InterruptedException {
         try {
+            int[] testn = new int[1000];
             for (int k : TIRIAMI_KIEKIAI) {
                 //Automobilis[] autoMas = AutoGamyba.generuotiIrIsmaisyti(k, 1.0);
                 int[] values = ValueGenerator.generateInt(k);
+                for (int i = 0; i < 1000; i++) {
+                    testn[i] = ValueGenerator.randomSerialNumber();
+                }
                 aSeries.clear();
                 aSeries2.clear();
                 tk.startAfterPause();
@@ -63,14 +66,16 @@ public class GreitaveikosTyrimas {
                 }
                 tk.finish(TYRIMU_VARDAI[1]);
                 //---------------------------
-                int testNumb = ValueGenerator.randomSerialNumber();
                     
-                
-                aSeries.contains(testNumb);
-                tk.finish(TYRIMU_VARDAI[2]);
-
-                    aSeries.contains(testNumb);
-                tk.finish(TYRIMU_VARDAI[3]);
+                for (int i = 0; i < 1000; i++) {
+                    aSeries.contains(testn[i]);
+                    tk.finish(TYRIMU_VARDAI[2]);
+                }
+                for (int i = 0; i < 1000; i++) {
+                    aSeries.contains(testn[i]);
+                    tk.finish(TYRIMU_VARDAI[3]);
+                }
+               
                 tk.seriesFinish();
             
             }

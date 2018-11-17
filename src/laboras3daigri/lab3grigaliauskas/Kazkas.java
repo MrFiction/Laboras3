@@ -17,7 +17,7 @@ import laborai.studijosktu.KTUable;
  *
  * @author Laptopas
  */
-public class kazkas implements KTUable<kazkas> {
+public class Kazkas implements KTUable<Kazkas> {
 
     final static private LocalDate curentYearLocalVar = LocalDate.now();
     private double price;
@@ -25,10 +25,10 @@ public class kazkas implements KTUable<kazkas> {
     private String model;
     private int serialNumber;
 
-    public kazkas() {
+    public Kazkas() {
     }
 
-    public kazkas(double price, LocalDate manifacuturingDate, String model, int serialNumber) {
+    public Kazkas(double price, LocalDate manifacuturingDate, String model, int serialNumber) {
         this.price = price;
         this.manifacturingDate = manifacuturingDate;
         this.model = model;
@@ -69,12 +69,12 @@ public class kazkas implements KTUable<kazkas> {
 
     @Override
     public String toString() {
-        return "Price=" + String.format("%.2f", price) + ", Manifacturing date=" + manifacturingDate + ", Model=" + model + ", serialNumber=" + serialNumber;
+        return "Model = " + model + ", serialNumber = " + serialNumber +", Price = " + String.format("%.2f", price) + ", Manifacturing date = " + manifacturingDate ;
     }
 
     @Override
     public KTUable create(String dataString) {
-        kazkas tempObj = new kazkas();
+        Kazkas tempObj = new Kazkas();
         tempObj.parse(dataString);
         return tempObj;
     }
@@ -106,14 +106,14 @@ public class kazkas implements KTUable<kazkas> {
     }
 
     @Override
-    public int compareTo(kazkas e) {
+    public int compareTo(Kazkas e) {
         if (e == null) {
             return 1;
         }
-        if (price > e.price) {
+        if (serialNumber > e.serialNumber) {
             return 1;
         }
-        if (price < e.price) {
+        if (serialNumber < e.serialNumber) {
             return -1;
         }
         return 0;
@@ -130,7 +130,7 @@ public class kazkas implements KTUable<kazkas> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final kazkas other = (kazkas) obj;
+        final Kazkas other = (Kazkas) obj;
         if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
             return false;
         }
@@ -159,8 +159,8 @@ public class kazkas implements KTUable<kazkas> {
     public final static Comparator byManufacturingDate = new Comparator() {
         @Override
         public int compare(Object o1, Object o2) {
-            kazkas a1 = (kazkas) o1;
-            kazkas a2 = (kazkas) o2;
+            Kazkas a1 = (Kazkas) o1;
+            Kazkas a2 = (Kazkas) o2;
             int compare = a1.getManifacuturingDate().compareTo(a2.getManifacuturingDate());
             return compare;
         }
@@ -169,8 +169,8 @@ public class kazkas implements KTUable<kazkas> {
     public final static Comparator byPrice = new Comparator() {
         @Override
         public int compare(Object o1, Object o2) {
-            kazkas a1 = (kazkas) o1;
-            kazkas a2 = (kazkas) o2;
+            Kazkas a1 = (Kazkas) o1;
+            Kazkas a2 = (Kazkas) o2;
             return Double.compare(a1.getPrice(), a2.getPrice());
 
         }
